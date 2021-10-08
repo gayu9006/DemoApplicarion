@@ -24,3 +24,17 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+.my-custom-toastSuceess{
+  --background: green;
+  color: white;
+  --ion-font-family: AdobeClean;
+  --font-max-size: 16px !important;
+}
+
+//For TOAST Red
+.my-custom-toastError{
+  --background: red;
+  color: white;
+  --ion-font-family: AdobeClean;
+  --font-max-size: 16px !important;
+}

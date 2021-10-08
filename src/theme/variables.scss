@@ -233,4 +233,18 @@
 
     --ion-card-background: #1e1e1e;
   }
+  .my-custom-toastSuceess{
+    --background: green;
+    color: white;
+    --ion-font-family: AdobeClean;
+    --font-max-size: 16px !important;
+  }
+
+  //For TOAST Red
+  .my-custom-toastError{
+    --background: red;
+    color: white;
+    --ion-font-family: AdobeClean;
+    --font-max-size: 16px !important;
+  }
 }

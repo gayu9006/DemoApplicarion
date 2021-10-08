@@ -1,20 +1,82 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Basic Employee Registration
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding text-center>
+  <ion-row>
+    <ion-col size="8">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button expand="block" size="small" (click)="viewEmployees()">
+        View List
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-grid fixed>
+    <form [formGroup]="empForm" novalidate *ngIf="empForm">
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>Employee Name</ion-label>
+        <ion-item>
+          <ion-input placeholder="Enter Name" required formControlName="name_model" [(ngModel)]="name_model"></ion-input>
+        </ion-item>
+        <ng-container *ngFor="let validation of validation_messages.name">
+          <div style="color: red!important;"
+            *ngIf="empForm.get('name_model').hasError(validation.type) && (empForm.get('name_model').dirty || empForm.get('name_model').touched)">
+            <ion-icon color="danger" name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>Email</ion-label>
+        <ion-item>
+          <ion-input type="email" placeholder="Enter Email" formControlName="Email" [(ngModel)]="Email"></ion-input>
+        </ion-item>
+        <div *ngIf="!empForm.controls.Email.valid && empForm.controls.Email.dirty"
+        style="color: red!important;">
+         Please enter valid Email address (eg.'you@example.com').
+ </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>Mobile Number</ion-label>
+        <ion-item>
+          <ion-input type="tel" placeholder="Enter Mobile Number" formControlName="Mobile" [(ngModel)]="Mobile"></ion-input>
+        </ion-item>
+        <div *ngIf="empForm.controls['Mobile'].invalid && (empForm.controls['Mobile'].dirty || empForm.controls['Mobile'].touched)" class="alert alert-danger">
+          <div *ngIf="empForm.controls['Mobile'].errors.required" style="color: var(--ion-color-danger)">
+           Mobile number is required.
+          </div>
+          <div *ngIf="empForm.controls['Mobile'].hasError('minlength')" style="color: var(--ion-color-danger)">
+            Mobile number should be 10 digits
+        </div>
+          <div *ngIf="empForm.controls['Mobile'].hasError('maxlength')" style="color: var(--ion-color-danger)">
+            Mobile number should be 10 digits
+        </div>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>Company Name</ion-label>
+        <ion-item>
+          <ion-input placeholder="Enter Name" formControlName="Company" [(ngModel)]="Company"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-grid>
 </ion-content>
+<ion-footer *ngIf="empForm">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button [disabled]="empForm.invalid" color="success" expand="block" mode="ios" (click)="insertRow()">
+          Submit
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
